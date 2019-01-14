@@ -9,6 +9,16 @@ const rqListener = (req, res) => {
   }
 
   if (url === "/message" && method === "POST") {
+    const body = [];
+
+    req.on("data", chunk => {
+      body.push(chunk);
+    });
+
+    req.on("end", () => {
+      const parsedBody = Buffer.concat(body).toString();
+    });
+
     fs.writeFileSync("message.txt", "DUMMY");
     res.statusCode = 302;
     res.setHeader("Location", "/");
