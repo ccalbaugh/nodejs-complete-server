@@ -5,6 +5,12 @@ const rqListener = (req, res) => {
   const { method, url } = req;
 
   if (url === "/") {
+    res.write("<html>");
+    res.write("<head><title>Type at me bro!</title></head>");
+    res.write(
+      '<body><form action="/message" method="POST"><input type="text" name="message"/></body>'
+    );
+    res.write("</html>");
     return res.end();
   }
 
